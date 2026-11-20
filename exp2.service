@@ -1,0 +1,14 @@
+[Unit]
+Description=Meshlab exp2: 4-node baseline logger
+After=network.target
+
+[Service]
+User=david
+WorkingDirectory=/home/david/mesh
+ExecStart=/home/david/mesh-venv/bin/python /home/david/mesh/exp2.py
+Restart=always
+RestartSec=15
+Nice=10
+
+[Install]
+WantedBy=multi-user.target
