@@ -1,0 +1,13 @@
+[Unit]
+Description=Meshtastic coverage logger
+After=network.target
+
+[Service]
+User=david
+ExecStart=/home/david/mesh-venv/bin/python /home/david/mesh/meshmap.py
+Restart=always
+RestartSec=30
+Nice=10
+
+[Install]
+WantedBy=multi-user.target
