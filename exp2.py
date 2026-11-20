@@ -13,7 +13,7 @@ from meshtastic.protobuf import portnums_pb2
 
 NODES = {"!c1ce9509": "T1000", "!2344b302": "Rak1", "!054f6fbf": "Rak2"}
 INTERVAL = 120   # seconds between cycle starts
-TIMEOUT = 35     # seconds to wait for ACK/NAK per send
+TIMEOUT = 45     # seconds to wait for ACK/NAK per send (relays add time)
 DB = os.path.expanduser("~/mesh/exp2.db")
 BIRDS = "/home/david/BirdNET-Pi/scripts/birds.db"
 
@@ -29,7 +29,16 @@ CREATE TABLE IF NOT EXISTS sends(
 CREATE TABLE IF NOT EXISTS positions(
   ts TEXT, node TEXT, lat REAL, lon REAL, alt REAL, rx_snr REAL, rx_rssi INTEGER);
 """)
+for col in ("batt INTEGER", "volt REAL", "node_last_heard INTEGER", "relay_heard INTEGER"):
+    try:
+        db.execute(f"ALTER TABLE sends ADD COLUMN {col}")
+    except sqlite3.OperationalError:
+        pass
 db.commit()
+
+COLS = ("ts,cycle,order_idx,dest,dest_name,msg,delivered,reason,latency_s,ack_snr,ack_rssi,"
+        "ack_hops,relay_node,preset,tx_power,temp_f,hum,pres_in,wind_mph,wx_ts,"
+        "h4_ch_util,h4_air_tx,batt,volt,node_last_heard,relay_heard")
 
 def write(sql, args):
     with lock:
@@ -67,24 +76,42 @@ def connect():
             print("connect failed:", e, flush=True)
             time.sleep(10)
 
-def send_one(iface, dest, msg):
-    res, done = {}, threading.Event()
-    def cb(pkt):
-        r = pkt.get("decoded", {}).get("routing", {}).get("errorReason", "NONE")
-        if r == "NONE" and pkt.get("fromId") != dest:
-            r = "IMPLICIT"
-        hs, hl = pkt.get("hopStart"), pkt.get("hopLimit")
-        res.update(reason=r, snr=pkt.get("rxSnr"), rssi=pkt.get("rxRssi"),
+PENDING = {}  # packet id -> {"dest", "ev", "res"}
+
+def on_any(packet, interface):
+    """Catch every routing reply, so a relay's implicit ACK can't hide the real one."""
+    d = packet.get("decoded", {})
+    if d.get("portnum") != "ROUTING_APP":
+        return
+    p = PENDING.get(d.get("requestId"))
+    if not p:
+        return
+    reason = d.get("routing", {}).get("errorReason", "NONE")
+    res = p["res"]
+    if packet.get("fromId") == p["dest"]:            # real end-to-end ACK/NAK
+        hs, hl = packet.get("hopStart"), packet.get("hopLimit")
+        res.update(reason=reason, snr=packet.get("rxSnr"), rssi=packet.get("rxRssi"),
                    hops=(hs - hl) if hs is not None and hl is not None else None,
-                   relay=pkt.get("relayNode"), t=time.time())
-        done.set()
+                   relay=packet.get("relayNode"), t=time.time())
+        p["ev"].set()
+    elif reason == "NONE":                           # implicit ACK: a relay repeated it
+        res["relay_heard"] = 1
+    else:                                            # local NAK, e.g. MAX_RETRANSMIT
+        res.update(reason=reason, t=time.time())
+        p["ev"].set()
+
+pub.subscribe(on_any, "meshtastic.receive")
+
+def send_one(iface, dest, msg):
+    res, ev = {"relay_heard": 0}, threading.Event()
     t0 = time.time()
-    iface.sendData(msg.encode(), destinationId=dest,
-                   portNum=portnums_pb2.PortNum.TEXT_MESSAGE_APP,
-                   wantAck=True, onResponse=cb, onResponseAckPermitted=True)
-    done.wait(TIMEOUT)
-    res["delivered"] = int(done.is_set() and res.get("reason") == "NONE")
-    res["latency"] = round(res["t"] - t0, 2) if done.is_set() else None
+    pkt = iface.sendData(msg.encode(), destinationId=dest,
+                         portNum=portnums_pb2.PortNum.PRIVATE_APP, wantAck=True)
+    PENDING[pkt.id] = {"dest": dest, "ev": ev, "res": res}
+    ev.wait(TIMEOUT)
+    PENDING.pop(pkt.id, None)
+    res["delivered"] = int(ev.is_set() and res.get("reason") == "NONE" and "snr" in res)
+    res["latency"] = round(res["t"] - t0, 2) if ev.is_set() else None
     res.setdefault("reason", "TIMEOUT")
     return res
 
@@ -104,12 +131,16 @@ def main():
                 msg = (f"#{cycle} {datetime.now():%H:%M} Temp {fmt(t)}F Hum {fmt(h, 0)}% "
                        f"Pres {fmt(p, 2)}in Wind {fmt(w)}mph")
                 r = send_one(iface, dest, msg)
-                write("INSERT INTO sends VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                node = (iface.nodes or {}).get(dest, {})
+                nm = node.get("deviceMetrics", {})
+                write(f"INSERT INTO sends ({COLS}) VALUES ({','.join('?' * 26)})",
                       (datetime.now().isoformat(timespec="seconds"), cycle, i, dest,
                        NODES[dest], msg, r["delivered"], r["reason"], r["latency"],
                        r.get("snr"), r.get("rssi"), r.get("hops"), r.get("relay"),
                        lora.modem_preset, lora.tx_power, t, h, p, w, wx_ts,
-                       dm.get("channelUtilization"), dm.get("airUtilTx")))
+                       dm.get("channelUtilization"), dm.get("airUtilTx"),
+                       nm.get("batteryLevel"), nm.get("voltage"), node.get("lastHeard"),
+                       r["relay_heard"]))
                 print(f"cycle {cycle} {NODES[dest]:6} delivered={r['delivered']} "
                       f"snr={r.get('snr')} lat={r['latency']}", flush=True)
         except Exception as e:
