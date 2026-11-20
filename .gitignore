@@ -1,0 +1,14 @@
+# data and results stay on the Pi
+*.db
+*.db-journal
+*.csv
+*.log
+logs/
+# environments and caches
+__pycache__/
+*.pyc
+.venv/
+# secrets
+.env
+*.key
+channel_url*.txt
