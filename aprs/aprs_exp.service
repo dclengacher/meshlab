@@ -1,0 +1,15 @@
+[Unit]
+Description=Meshlab APRS twin of exp2 (KR4QIB-10 -> KR4QIB-7)
+After=direwolf.service
+Requires=direwolf.service
+
+[Service]
+User=david
+WorkingDirectory=/home/david/mesh
+ExecStart=/usr/bin/python3 /home/david/mesh/aprs/aprs_exp.py
+Restart=always
+RestartSec=15
+Nice=10
+
+[Install]
+WantedBy=multi-user.target
