@@ -12,3 +12,6 @@ __pycache__/
 .env
 *.key
 channel_url*.txt
+
+# experiment metadata IS versioned
+!experiments/segments.csv

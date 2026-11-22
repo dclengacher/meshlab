@@ -1,0 +1,22 @@
+segment_id,start,end,include,location_tag,h4,rak2,rak1,t1000,aprs,exp2_version,notes
+S00,2026-11-20 14:29,2026-11-20 16:45,no,home_shakedown,home_2nd_floor,home,home,home,off,v1_text_msgs,All nodes in one room; shakedown only
+S01,2026-11-20 16:45,2026-11-20 17:25,no,rak2_deploy,home_2nd_floor,uncsa_catwalk,transit,transit,off,v1,Rak2 live on catwalk from 16:45; others not yet placed
+S02,2026-11-20 17:25,2026-11-20 20:15,yes,evening_3node,home_2nd_floor,uncsa_catwalk,swaims,car_moonroof_43_park_blvd,off,v1_relay_aware,Msgs every 2 min; relays allowed; no traceroutes yet. T1000 car at 43 Park Blvd ~3/4 way to Swaim (0.9 mi by road from home at 630 S Broad St; Swaim's 1.2 mi by road)
+S03,2026-11-20 20:15,2026-11-20 20:48,no,rak1_home,home_2nd_floor,uncsa_catwalk,home_on,car_moonroof_43_park_blvd,off,v1,Rak1 back home and still on (can relay) — exclude
+S04,2026-11-20 20:48,2026-11-21 07:15,yes,overnight_2node,home_2nd_floor,uncsa_catwalk,off,car_moonroof_43_park_blvd,off,v2_survey20,Traceroute+battery survey every 20 min; battery request fixed 21:48; traceroutes <30 s after previous are rate-limit artifacts
+S05,2026-11-21 07:15,2026-11-21 07:44,no,t1000_retrieval,home_2nd_floor,uncsa_catwalk,off,transit,off,v2,T1000 removed from car
+S06a,2026-11-21 07:44,2026-11-21 11:08,yes,home_yard,home_2nd_floor,uncsa_catwalk,yard_20ft_lower_30ft_N,yard_20ft_lower_30ft_W,off,v2b_3node,Yard nodes saturate (ceiling); Rak1 traceroutes failed = rate-limit artifact
+S06b,2026-11-21 11:08,2026-11-21 11:50,yes,home_yard,home_2nd_floor,uncsa_catwalk,yard_20ft_lower_30ft_N,yard_20ft_lower_30ft_W,off,v3_both_ops_4min,Middle-node traceroutes failed = rate-limit artifact (fixed 11:50)
+S06c,2026-11-21 11:50,2026-11-21 13:24,yes,home_yard,home_2nd_floor,uncsa_catwalk,yard_20ft_lower_30ft_N,yard_20ft_lower_30ft_W,off,v3_final,Traceroutes spaced 45 s; clean
+S07,2026-11-21 13:24,2026-11-21 13:30,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,APRS started 13:24 (UV-Pro with user)
+S08,2026-11-21 13:30,2026-11-21 14:40,yes,brewery,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,Lesserknown brewery 0.2 mi S downhill. UV-Pro TX power = Low (confirmed). FT-65 later found tipped on side (time unknown). FT-65 audio input clipping (level ~180)
+S09,2026-11-21 14:40,2026-11-21 14:45,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,
+S10,2026-11-21 14:45,2026-11-21 14:57,yes,under_rak2,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,15 ft below Rak2. Window from GPS: T1000 fixes 14:45:50-14:57:58 and Rak1 fix 14:50:12 all at Rak2's position; T1000 leaving by 14:58:49
+S11,2026-11-21 14:57,2026-11-21 15:00,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,
+S12,2026-11-21 15:00,2026-11-21 15:04,yes,old_salem,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,0.2 mi E downhill; very short (1-2 cycles)
+S13,2026-11-21 15:04,2026-11-21 16:58,yes,home_after_trip,home_2nd_floor,uncsa_catwalk,home,home,partial,v3_final,APRS paused 15:16-16:41; FT-65 set upright; Digirig input gain lowered 15:34; UV-Pro set to High before 16:41
+S14,2026-11-21 16:58,2026-11-21 17:05,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,E-scooter ride
+S15,2026-11-21 17:05,2026-11-21 19:12,yes,swaims_with_user,home_2nd_floor,uncsa_catwalk,swaims_bar_patio,swaims_bar_patio,on,v3_final,All 3 devices with user ~15 m apart; ~1.04 mi from home; UV-Pro High; FT-65 upright
+S16,2026-11-21 19:12,2026-11-21 19:19,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,
+S17,2026-11-21 19:19,2026-11-21 20:02,yes,home_evening,home_2nd_floor,uncsa_catwalk,home,home,on,v3_final,APRS stopped/disabled 20:02
+S18,2026-11-21 20:02,2026-11-22 09:38,yes,home_overnight,home_2nd_floor,uncsa_catwalk,home,home_indoors_unknown_spot,off,v3_final,T1000 misplaced inside house overnight (found 11-22 ~09:30)
