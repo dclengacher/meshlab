@@ -20,3 +20,15 @@ S15,2026-11-21 17:05,2026-11-21 19:12,yes,swaims_with_user,home_2nd_floor,uncsa_
 S16,2026-11-21 19:12,2026-11-21 19:19,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,
 S17,2026-11-21 19:19,2026-11-21 20:02,yes,home_evening,home_2nd_floor,uncsa_catwalk,home,home,on,v3_final,APRS stopped/disabled 20:02
 S18,2026-11-21 20:02,2026-11-22 09:38,yes,home_overnight,home_2nd_floor,uncsa_catwalk,home,home_indoors_unknown_spot,off,v3_final,T1000 misplaced inside house overnight (found 11-22 ~09:30)
+S19,2026-11-22 09:38,2026-11-22 12:12,yes,home_morning,home_2nd_floor,uncsa_catwalk,home,home,on_from_12:05,v3_final,T1000 found indoors ~09:30; APRS restarted 12:05 (acks 76-77 first try)
+S20,2026-11-22 12:12,2026-11-22 12:16,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,E-scooter ~15 mph north; all devices carried outdoors
+S21,2026-11-22 12:16,2026-11-22 12:26,yes,joymongers,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,Joymongers 480 W End Blvd; GPS 0.68 mi NW of home; lower elevation; outdoors. User: no APRS received; APRS outbound: #79-#81 NOT received by UV-Pro
+S22,2026-11-22 12:26,2026-11-22 12:32,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,APRS #82 received by UV-Pro 12:29 while riding
+S23,2026-11-22 12:32,2026-11-22 12:41,yes,finnegans_fiddlin,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,"Finnegan's Wake (Trade St) 12:32-12:36 then Fiddlin' Fish one block N 12:39-12:41 (treated as one spot); GPS ~1.1 mi N; outdoors. APRS outbound: #83 (12:33), #84 (12:37), #85 (12:41) received by UV-Pro; NO receipts reached home"
+S24,2026-11-22 12:41,2026-11-22 12:47,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,~3 blocks north
+S25,2026-11-22 12:47,2026-11-22 13:54,yes,wiseman,home_2nd_floor,uncsa_catwalk,wiseman_patio_6in_apart,wiseman_patio_6in_apart,on,v3_final,Wiseman Brewing ~1.7 mi NNW (user; no GPS fix reached home); T1000 and Rak1 within 6 in; outdoors. APRS outbound: #87-#103 NOT received by UV-Pro. Start set by route change at 12:47; left 13:54
+S26,2026-11-22 13:54,2026-11-22 14:07,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,"Ride home; APRS #104 received by UV-Pro 13:57 en route; first receipt at home: #106 (14:06, after 4 tries)"
+S27,2026-11-22 14:07,2026-11-22 15:00,yes,home_afternoon,home_2nd_floor,uncsa_catwalk,home,home,on,v3_final,Home; APRS receipts resumed 14:06 (#107+ first try). Ends at Swaim's departure 15:00
+S28,2026-11-22 15:00,2026-11-22 15:10,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,Ride to Swaim's
+S29,2026-11-22 15:10,2026-11-22 18:00,yes,swaims_repeat,home_2nd_floor,uncsa_catwalk,with_user_swaims,with_user_swaims,on,v3_final,Repeat of 11-21 S15 at Swaim's (~1.04 mi). APRS: no receipts reached home (user: no luck). APRS discontinued after this run
+S30,2026-11-22 18:00,,no,transit_then_home,home_2nd_floor,uncsa_catwalk,with_user,with_user,off_after_return,v3_final,OPEN — set arrival-home time from GPS; APRS disabled permanently on return
