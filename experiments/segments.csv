@@ -32,4 +32,12 @@ S27,2026-11-22 14:07,2026-11-22 15:00,yes,home_afternoon,home_2nd_floor,uncsa_ca
 S28,2026-11-22 15:00,2026-11-22 15:20,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,Ride to Swaim's (GPS: left home ~15:13; at Swaim's ~15:20)
 S29,2026-11-22 15:20,2026-11-22 17:53,yes,swaims_repeat,home_2nd_floor,uncsa_catwalk,swaims_bar_patio,swaims_bar_patio,on,v3_final,Repeat of 11-21 S15 (times from GPS; within ~25 m of 11-21 spot). Humidity 90% vs 44% on 11-21. T1000 1/36 and Rak1 0/36 delivered vs 15/31 and 10/30 on 11-21. APRS: no receipts reached home; APRS discontinued after this run
 S30,2026-11-22 17:53,2026-11-22 18:01,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,on,v3_final,Ride home (GPS)
-S31,2026-11-22 18:01,,yes,home_evening,home_2nd_floor,uncsa_catwalk,home,home,off,v3_final,OPEN. APRS services disabled permanently ~18:45
+S31,2026-11-22 18:01,2026-11-23 06:37,yes,home_overnight,home_2nd_floor,uncsa_catwalk,home,home,off,v3_final,APRS services disabled ~18:45 on 11-22
+S32,2026-11-23 06:37,2026-11-23 07:11,no,t1000_short_trip,home_2nd_floor,uncsa_catwalk,home,with_user,off,v3_final,GPS: T1000 only went ~0.6 mi NW and back (not reported by user; Rak1 stayed home)
+S33,2026-11-23 07:11,2026-11-23 14:07,yes,home_day,home_2nd_floor,uncsa_catwalk,home,home,off,v3_final,
+S34,2026-11-23 14:07,2026-11-23 14:09,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,off,v3_final,E-scooter
+S35,2026-11-23 14:09,2026-11-23 14:14,yes,spot_A_west,home_2nd_floor,uncsa_catwalk,with_user,with_user,off,v3_final,36.085302 -80.252512 (~0.27 mi W); one full 4-min cycle; times from GPS
+S36,2026-11-23 14:14,2026-11-23 14:18,yes,spot_B_sw,home_2nd_floor,uncsa_catwalk,with_user,with_user,off,v3_final,36.082780 -80.251025 (~0.29 mi SW); one full 4-min cycle; times from GPS
+S37,2026-11-23 14:18,2026-11-23 14:21,yes,spot_C_south,home_2nd_floor,uncsa_catwalk,with_user,with_user,off,v3_final,36.081953 -80.246686 (~0.28 mi S); user recorded leaving 14:21
+S38,2026-11-23 14:21,2026-11-23 14:25,no,transit,home_2nd_floor,uncsa_catwalk,with_user,with_user,off,v3_final,Ride home
+S39,2026-11-23 14:25,,yes,home_evening,home_2nd_floor,uncsa_catwalk,home,home,off,v3_final,OPEN
